@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 def get_page_content(url: str) -> str:
@@ -45,14 +45,12 @@ def download_image(url: str, folder: str) -> None:
     image_name = get_image_name_from_url(url)
     image_absolute_path = pathlib.Path(folder) / image_name
     response = requests.get(url, stream=True)
-    status_message = '[{}] {}'
     if response.status_code == 200:
-        with open(image_absolute_path, 'wb') as f:
-            f.write(response.content)
-        logger.info(status_message.format('V', url))
+        with open(image_absolute_path, 'wb') as image_file:
+            image_file.write(response.content)
+        LOGGER.info('[%s] %s', 'V', url)
     else:
-        logger.info(status_message.format('X', url))
-
+        LOGGER.info('[%s] %s', 'X', url)
 
 def download_images_from_page(url: str, folder: str) -> None:
     """Downloads images from web page."""
