@@ -15,15 +15,13 @@
 					<section>
 						<!-- Slide: pypi -->
 						<section data-markdown>
-
 							<textarea data-template>
 								### Python Package Index (PyPi)
 	
 								PyPI is the default *Package Index* for the Python community. It is open to all Python
 								developers to consume and distribute their distributions
 								
-								*Python Index* is a repository of distributions with a web interface to automate package discovery and consumption
-	
+								*Python Index* is a repository of distributions with a web interface to automate package discovery and consumption	
 							</textarea>	
 						</section>
 						
@@ -49,9 +47,8 @@
 							</textarea>	
 						</section>
 						
-						<!-- Slide: installing packages -->
+						<!-- Slide: using pip -->
 						<section data-markdown>
-
 							<textarea data-template>
 								### Using pip
 								
@@ -69,10 +66,8 @@
 								# uninstall package
 								pip uninstall package
 								```
-
 							</textarea>	
 						</section>
-
 					</section>
 
 					<!-- Slide: project structure -->
@@ -98,6 +93,8 @@
 								```
 							</textarea>
 						</section>
+
+						<!-- Slide: making a directory runnable -->
 						<section data-markdown>
 							<textarea data-template>
 								### Making a directory runnable
@@ -111,7 +108,7 @@
 						</section>
 					</section>
 
-					<!-- Slide: requirements.txt -->
+					<!-- Slide: listing requirements -->
 					<section data-markdown>
 						<textarea data-template>
 							### Listing requirements
@@ -144,7 +141,7 @@
 						</textarea>
 					</section>
 
-					<!-- Slide: license -->
+					<!-- Slide: lawyering up -->
 					<section data-markdown>
 						<textarea data-template>
 							### Lawyering up
@@ -169,7 +166,7 @@
 					</section>
 				
 					<section>
-						<!-- Slide: setup.py -->
+						<!-- Slide: setup script -->
 						<section data-markdown>
 							<textarea data-template>
 								### Setup script
@@ -187,11 +184,10 @@
 									packages=find_packages(),
 								)
 								```
-
 							</textarea>
 						</section>
 
-						<!-- Slide: install_requires -->
+						<!-- Slide: listing requirements, again -->
 						<section data-markdown>
 							<textarea data-template>
 								### Listing requirements, again
@@ -219,11 +215,10 @@
 								| single project          | complete environment |
 								| minimal                 | exhaustive           |
 								| abstract (no index)     | concrete             |
-
 							</textarea>
 						</section>
 
-						<!-- Slide: entry points -->
+						<!-- Slide: command line interaces -->
 						<section data-markdown>
 							<textarea data-template>
 								### Command line interaces
@@ -243,7 +238,7 @@
 							</textarea>
 						</section>
 
-						<!-- Slide: long description -->
+						<!-- Slide: detailed package description -->
 						<section data-markdown>
 							<textarea data-template>
 								### Detailed package description
@@ -292,8 +287,7 @@
 						</section>
 					</section>
 
-					<section>
-						
+					<section>						
 						<!-- Slide: setup configuration file -->
 						<section data-markdown>
 							<textarea data-template>
@@ -302,13 +296,13 @@
 								*setup.cfg* defines a package metadata and other options that are normally supplied to the `setup()` function in *setup.py*
 
 								This approach not only allows automation scenarios but also reduces boilerplate code in some cases
-								
-
 							</textarea>
 						</section>
+
+						<!-- Slide: setup.cfg example -->
 						<section data-markdown>
 							<textarea data-template>
-								### example
+								### setup.cfg example
 
 								```
 								# content of setup.cfg file
@@ -331,7 +325,7 @@
 					</section>
 
 					<section>
-						<!-- Slide: Source distribution -->
+						<!-- Slide: source distribution -->
 						<section data-markdown>
 							<textarea data-template>
 								### Source distribution
@@ -342,11 +336,10 @@
 								To create source distribution use
 
 								`$ python setup.py sdist`
-	
 							</textarea>	
 						</section>
 
-						<!-- Slide: Source distribution -->
+						<!-- Slide: what files are included in sdist? -->
 						<section data-markdown>
 							<textarea data-template>
 								### What files are included in sdist?
@@ -358,11 +351,10 @@
 								- MANIFEST.in
 								
 								[Full list](https://packaging.python.org/guides/using-manifest-in/#how-files-are-included-in-an-sdist)
-	
 							</textarea>	
 						</section>
 
-						<!-- Slide: data files -->
+						<!-- Slide: extra files :: package data -->
 						<section data-markdown>
 							<textarea data-template>
 								### Extra files :: package data
@@ -378,6 +370,7 @@
 							</textarea>
 						</section>
 
+						<!-- Slide: extra files :: data files -->
 						<section data-markdown>
 							<textarea data-template>
 								### Extra files :: data files
@@ -393,7 +386,7 @@
 							</textarea>
 						</section>
 
-						<!-- Slide: MANIFEST -->
+						<!-- Slide: extra files :: MANIFEST -->
 						<section data-markdown>
 							<textarea data-template>
 								### Extra files :: MANIFEST
@@ -406,22 +399,21 @@
 								```
 							</textarea>
 						</section>
-
 					</section>
-					
+
 					<section>
 						<!-- Slide: Build distribution -->
 						<section data-markdown>
 							<textarea data-template>
 								### Build distribution
-								
+
 								- A format containing files and metadata that only need to be moved to the correct location on the target system, to be installed
 								- Newer pip versions preferentially install built distributions, but will fall back to source archives if needed
 								- Best when come with source distributions to match
 							</textarea>
 						</section>
 
-						<!-- Slide: Wheel distribution -->
+						<!-- Slide: wheel -->
 						<section data-markdown>
 							<textarea data-template>
 								### Wheel
@@ -435,7 +427,7 @@
 							</textarea>
 						</section>
 
-						<!-- Slide: advantages of wheel -->
+						<!-- Slide: wheel advantages -->
 						<section data-markdown>
 							<textarea data-template>
 								### Wheel advantages
@@ -443,15 +435,14 @@
 								- Faster installation for pure Python and native C extension packages
 								- Does not include .pyc files in comparison to *egg* format
 							</textarea>
-						</section>
-						
+						</section>						
 					</section>
 
-					<!-- Slide: tox -->
 					<section>
+						<!-- Slide: running tests -->
 						<section data-markdown>
 							<textarea data-template>
-								### Running tests
+								### Running tests with pytest
 
 								*pytest* framework makes it easy to write small tests
 
@@ -465,13 +456,12 @@
 									assert function() == '42'
 								```
 								To execute tests use
-								
+
 								`$ python -m pytest tests/<test_file>.py`
-								
 							</textarea>
 						</section>
 
-						
+						<!-- Slide: standardized testing -->
 						<section data-markdown>
 							<textarea data-template>
 								### Standardized testing
@@ -492,13 +482,11 @@
 								To execute tests use
 
 								`$ tox`
-
 							</textarea>
 						</section>
-
 					</section>
 
-					<!-- Slide:  -->
+					<!-- Slide: installing a local package -->
 					<section data-markdown>
 						<textarea data-template>
 							### Installing a local package
@@ -516,7 +504,7 @@
 						</textarea>
 					</section>
 
-					<!-- Slide: sharing your labor -->
+					<!-- Slide: do not use -->
 					<section data-markdown>
 						<textarea data-template>
 							### do not use
@@ -524,8 +512,6 @@
 							- <font color="red">[deprecated]</font> Easy Install package manages that comes with setuptools
 							- <font color="red">[deprecated]</font> `python setup.py test` 
 							- <font color="red">[support is dropped by pip]</font> `dependency_links` keyword in setup.py to specify dependencies that are not on PyPi
-
-
 						</textarea>
 					</section>
 
