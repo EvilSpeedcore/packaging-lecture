@@ -16,7 +16,7 @@
 						<!-- Slide: pypi -->
 						<section data-markdown>
 							<textarea data-template>
-								### Python Package Index (PyPi)
+								### Python Package Index (PyPI)
 	
 								PyPI is the default *Package Index* for the Python community. It is open to all Python
 								developers to consume and distribute their distributions
@@ -55,7 +55,7 @@
 								Pip is a standard Python package manager
 
 								```
-								# install package from PyPi
+								# install package from PyPI
 								pip install package
 								pip install package==1.4
 								pip install package --upgrade
@@ -512,9 +512,19 @@
 					<!-- Slide: sharing your labor -->
 					<section data-markdown>
 						<textarea data-template>
-							### Sharing your labor
+							### Sharing your labor on TestPyPI
 
-							Text.
+							1. Generate distribution archives
+							 
+							 `python setup.py sdist bdist_wheel`
+
+							2. Register an account on [TestPyPI](https://test.pypi.org/account/register/)
+
+							3. Upload package using *twine*
+							```
+							pip install twine
+							python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+							```
 						</textarea>
 					</section>
 
@@ -525,7 +535,7 @@
 
 							- Easy Install package manages that comes with setuptools
 							- `python setup.py test` 
-							- `dependency_links` keyword in setup.py to specify dependencies that are not on PyPi
+							- `dependency_links` keyword in setup.py to specify dependencies that are not on PyPI
 						</textarea>
 					</section>
 
