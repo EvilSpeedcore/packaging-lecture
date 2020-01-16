@@ -490,8 +490,22 @@
 					<section data-markdown>
 						<textarea data-template>
 							### Installing a local package
+							
+							When *setup.py* is located inside *directory*
 
-							Text.
+							`pip install directory/`
+
+							When you are inside a directory with setup.py
+
+							```
+							python setup.py install
+							pip install .
+							```
+							From local archives
+							```
+							pip install <source_distribution>.tar.gz
+							pip install <wheel_distribution>.whl
+							```
 						</textarea>
 					</section>
 
@@ -515,7 +529,7 @@
 						</textarea>
 					</section>
 
-					<!-- Slide: links -->
+					<!-- Slide: useful links -->
 					<section data-markdown>
 						<textarea data-template>
 							### Useful links
@@ -528,7 +542,6 @@
 							- [A template to make a good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
 						</textarea>
 					</section>
-
 				</div>
 			</div>
 		</div>
