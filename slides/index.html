@@ -1,0 +1,557 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/css/reveal.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/css/theme/white.css">
+	</head>
+	<style>
+      code {
+        background: #fff8c7;
+      }
+	</style>
+	<body>
+		<div class="reveal">
+			<div class="reveal">
+				<div class="slides">
+					<section>
+						<!-- Slide: pypi -->
+						<section data-markdown>
+
+							<textarea data-template>
+								### Python Package Index (PyPi)
+	
+								PyPI is the default *Package Index* for the Python community. It is open to all Python
+								developers to consume and distribute their distributions
+								
+								*Python Index* is a repository of distributions with a web interface to automate package discovery and consumption
+	
+							</textarea>	
+						</section>
+						
+						<!-- Slide: virtual environment -->
+						<section data-markdown>
+							<textarea data-template>
+								### Using a virtual environment
+								
+								*Virtual environment* is a self-contained directory tree that contains a Python installation for a particular version of Python
+
+								```
+								# create
+								python -m venv venv
+
+								# activate
+								source venv/bin/activate  # POSIX
+								venv/Scripts/activate.bat # Windows cmd.exe
+								venv/Scripts/activate.ps1 # Windows PowerShell
+								
+								# deactivate
+								deactivate
+								```
+							</textarea>	
+						</section>
+						
+						<!-- Slide: installing packages -->
+						<section data-markdown>
+
+							<textarea data-template>
+								### Using pip
+								
+								Pip is a standard Python package manager
+
+								```
+								# install package from PyPi
+								pip install package
+								pip install package==1.4
+								pip install package --upgrade
+								
+								# install package from an alternate index
+								pip install --index-url http://my.package.repo/simple/ package
+
+								# uninstall package
+								pip uninstall package
+								```
+
+							</textarea>	
+						</section>
+
+					</section>
+
+					<!-- Slide: project structure -->
+					<section>
+						<section data-markdown>
+							<textarea data-template>
+								### Project structure
+								```
+								docs/
+									about.rst
+								example/                     Top-level package
+										__init__.py          Initialize the example package
+										helpers/             Subpackage for helper functions
+												__init__.py
+												logging.py		
+												
+								tests/
+									test_example.py
+								LICENSE
+								README.md
+								requirements.txt
+								setup.py
+								```
+							</textarea>
+						</section>
+						<section data-markdown>
+							<textarea data-template>
+								### Making a directory runnable
+								
+								If *\__main__.py* file is present in *example* directory, you can run the Python interpreter like this
+								
+								`$ python -m example`
+
+								The interpreter will execute *\__main__.py* file as the main program
+							</textarea>
+						</section>
+					</section>
+
+					<!-- Slide: requirements.txt -->
+					<section data-markdown>
+						<textarea data-template>
+							### Listing requirements
+							
+							Requirements files are used to hold the result from pip freeze for the purpose of achieving repeatable installations
+							```
+							pip freeze > requirements.txt
+							pip install -r requirements.txt
+							```
+						</textarea>
+					</section>
+
+					<!-- Slide: readme -->
+					<section data-markdown>
+						<textarea data-template>
+							### README
+
+							Projects should contain a readme file that covers the goal of the project, how to use and support it
+
+							The most common markup languages to write readme are *reStructuredText* and *Markdown*
+							```
+							content of README.md
+
+							# Example Package
+
+							This is a simple example package. You can use
+							[Markdown](https://guides.github.com/features/mastering-markdown/)
+							to write your content.
+							```
+						</textarea>
+					</section>
+
+					<!-- Slide: license -->
+					<section data-markdown>
+						<textarea data-template>
+							### Lawyering up
+							
+							License tells users who install your package the terms under which they can use your package
+							
+							Do not write your own license, use https://choosealicense.com/
+
+							Popular licenses: *MIT License*, *GNU GPLv3*
+						</textarea>
+					</section>
+
+					<!-- Slide: libraries to facilitate packaging -->
+					<section data-markdown>
+						<textarea data-template>
+							### Libraries to facilitate packaging
+							
+							- *distutils* is a standard library package, which provides a support for building and installing additional modules
+							
+							- *setuptools* is a collection of enhancements to the Python *distutils*
+						</textarea>
+					</section>
+				
+					<section>
+						<!-- Slide: setup.py -->
+						<section data-markdown>
+							<textarea data-template>
+								### Setup script
+	
+								*setup.py* is the project build script for libraries like *distutils* and *setuptools*
+
+								```
+								# content of setup.py
+								from setuptools import find_packages, setup
+
+
+								setup(
+									name='example',
+									version='0.1',
+									packages=find_packages(),
+								)
+								```
+
+							</textarea>
+						</section>
+
+						<!-- Slide: install_requires -->
+						<section data-markdown>
+							<textarea data-template>
+								### Listing requirements, again
+								
+								`install_requires` should be used to specify what a project minimally needs to run correctly
+								
+								```
+								install_requires = [
+									'beautifulsoup4',
+									'package @ https://repo/packages/package/0.1.0/package.whl'
+								]
+								```
+							</textarea>
+						</section>
+
+						<!-- Slide: install_requires vs requirements.txt -->
+						<section data-markdown>
+							<textarea data-template>
+								### install_requires 
+								##### vs 
+								### requirements.txt
+								
+								| install_requires        | requirements.txt     |
+								| ----------------------- |----------------------|
+								| single project          | complete environment |
+								| minimal                 | exhaustive           |
+								| abstract (no index)     | concrete             |
+
+							</textarea>
+						</section>
+
+						<!-- Slide: entry points -->
+						<section data-markdown>
+							<textarea data-template>
+								### Command line interaces
+								
+								Console script entry points allow you to register script interfaces
+
+								```
+								entry_points={
+									'console_scripts': [
+										'command=package:function',
+									],
+								}
+								```
+								After installing a package, you can use registered command in console using
+								
+								`$ command [option] ...`
+							</textarea>
+						</section>
+
+						<!-- Slide: long description -->
+						<section data-markdown>
+							<textarea data-template>
+								### Detailed package description
+								
+								`long_description` is a detailed description of the package. It is shown on the package page
+								on the Python Package Index
+								```
+								# content of setup.py
+								import os
+
+
+								here = os.path.abspath(os.path.dirname(__file__))
+
+								with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+									long_description = f.read()
+								
+								setup(
+									long_description=long_description,
+									long_description_content_type='text/markdown'								
+								)
+								```
+
+							</textarea>
+						</section>
+
+						<!-- Slide: classifiers -->
+						<section data-markdown>
+							<textarea data-template>
+								### Classifiers
+	
+								Classifiers give the index and pip some additional metadata about your package
+								
+								You should always include at least:
+								- Version(s) of Python your package works on 
+								- License your package is available under
+								- Operating systems your package will work on
+
+								```
+								classifiers=[
+									'Programming Language :: Python :: 3.7',
+									'License :: OSI Approved :: MIT License',
+									'Operating System :: Microsoft :: Windows :: Windows 10'
+								]
+								```
+							</textarea>
+						</section>
+					</section>
+
+					<section>
+						
+						<!-- Slide: setup configuration file -->
+						<section data-markdown>
+							<textarea data-template>
+								### setup configuration file
+
+								*setup.cfg* defines a package metadata and other options that are normally supplied to the `setup()` function in *setup.py*
+
+								This approach not only allows automation scenarios but also reduces boilerplate code in some cases
+								
+
+							</textarea>
+						</section>
+						<section data-markdown>
+							<textarea data-template>
+								### example
+
+								```
+								# content of setup.cfg file
+								[metadata]
+								long_description = file: README.md
+								long_description_content_type = text/markdown; charset=UTF-8
+								classifiers =
+									Programming Language :: Python :: 3.7
+
+								[options]
+								packages = find:
+								install_requires = package
+
+								[options.entry_points]
+								console_scripts =
+									command=package:function
+								```
+							</textarea>
+						</section>
+					</section>
+
+					<section>
+						<!-- Slide: Source distribution -->
+						<section data-markdown>
+							<textarea data-template>
+								### Source distribution
+								
+								- A format that provides metadata and source files needed for installing , or for generating a *Built Distribution*
+								- *sdists* are compressed archive (usually .tar.gz files)
+								
+								To create source distribution use
+
+								`$ python setup.py sdist`
+	
+							</textarea>	
+						</section>
+
+						<!-- Slide: Source distribution -->
+						<section data-markdown>
+							<textarea data-template>
+								### What files are included in sdist?
+
+								- Python and C source files
+								- License file specified in setup.cfg
+								- setup.py, setup.cfg
+								- README.md, README.rst
+								- MANIFEST.in
+								
+								[Full list](https://packaging.python.org/guides/using-manifest-in/#how-files-are-included-in-an-sdist)
+	
+							</textarea>	
+						</section>
+
+						<!-- Slide: data files -->
+						<section data-markdown>
+							<textarea data-template>
+								### Extra files :: package data
+
+								To add files that are not automatically included in a source distribution *into* a package use `package_data` keyword in setup.py
+								```
+								# content of setup.py
+								package_data={
+									'example': ['data.dat']
+								}
+								```
+								Useful if you need to install files which are used by other programs
+							</textarea>
+						</section>
+
+						<section data-markdown>
+							<textarea data-template>
+								### Extra files :: data files
+
+								To place data files *outside* a package use `data_files` keyword in setup.py
+								```
+								# content of setup.py
+								data_files = [
+									('config', ['data.cfg'])
+								]
+								```
+								Useful if you need to install files which are used by other programs
+							</textarea>
+						</section>
+
+						<!-- Slide: MANIFEST -->
+						<section data-markdown>
+							<textarea data-template>
+								### Extra files :: MANIFEST
+								
+								Another way to additional files is to write a manifest template, called MANIFEST.in by default.
+								```  
+								# content of MANIFEST.in
+								include LICENSE.txt
+								include tox.ini
+								```
+							</textarea>
+						</section>
+
+					</section>
+					
+					<section>
+						<!-- Slide: Build distribution -->
+						<section data-markdown>
+							<textarea data-template>
+								### Build distribution
+								
+								- A format containing files and metadata that only need to be moved to the correct location on the target system, to be installed
+								- Newer pip versions preferentially install built distributions, but will fall back to source archives if needed
+								- Best when come with source distributions to match
+							</textarea>
+						</section>
+
+						<!-- Slide: Wheel distribution -->
+						<section data-markdown>
+							<textarea data-template>
+								### Wheel
+
+								A wheel is a ZIP-format archive with a specially formatted file name and the *.whl* extension
+								
+								```
+								pip install wheel
+								python setup.py bdist_wheel
+								```								
+							</textarea>
+						</section>
+
+						<!-- Slide: advantages of wheel -->
+						<section data-markdown>
+							<textarea data-template>
+								### Wheel advantages
+								- Has a [PEP](https://www.python.org/dev/peps/pep-0427/)
+								- Faster installation for pure Python and native C extension packages
+								- Does not include .pyc files in comparison to *egg* format
+							</textarea>
+						</section>
+						
+					</section>
+
+					<!-- Slide: tox -->
+					<section>
+						<section data-markdown>
+							<textarea data-template>
+								### Running tests
+
+								*pytest* framework makes it easy to write small tests
+
+								```
+								# content of test_function.py
+								from example.app import function
+
+
+								def test_function():
+									"""123"""
+									assert function() == '42'
+								```
+								To execute tests use
+								
+								`$ python -m pytest tests/<test_file>.py`
+								
+							</textarea>
+						</section>
+
+						
+						<section data-markdown>
+							<textarea data-template>
+								### Standardized testing
+								
+								Many projects use the *tox* to run tests. It ensures that tests are run in an isolated environment
+
+								```
+								# content of tox.ini
+								[tox]
+								envlist = py36
+
+								[testenv]
+								deps =
+									pytest
+								commands =
+									python -m pytest -x
+								```
+								To execute tests use
+
+								`$ tox`
+
+							</textarea>
+						</section>
+
+					</section>
+
+					<!-- Slide:  -->
+					<section data-markdown>
+						<textarea data-template>
+							### Installing a local package
+
+							Text.
+						</textarea>
+					</section>
+
+					<!-- Slide: sharing your labor -->
+					<section data-markdown>
+						<textarea data-template>
+							### Sharing your labor
+
+							Text.
+						</textarea>
+					</section>
+
+					<!-- Slide: sharing your labor -->
+					<section data-markdown>
+						<textarea data-template>
+							### do not use
+
+							- <font color="red">[deprecated]</font> Easy Install package manages that comes with setuptools
+							- <font color="red">[deprecated]</font> `python setup.py test` 
+							- <font color="red">[support is dropped by pip]</font> `dependency_links` keyword in setup.py to specify dependencies that are not on PyPi
+
+
+						</textarea>
+					</section>
+
+					<!-- Slide: links -->
+					<section data-markdown>
+						<textarea data-template>
+							### Useful links
+							
+							- [Python Packaging User Guide](https://packaging.python.org/)
+							- [setup.py (for humans)](https://github.com/navdeep-G/setup.py)
+							- [Configuring setup() using setup.cfg files](https://setuptools.readthedocs.io/en/latest/setuptools.html#configuring-setup-using-setup-cfg-files)
+							- [The Definitive Guide to Python import Statements](https://chrisyeh96.github.io/2017/08/08/definitive-guide-python-imports.html)	
+							- [setup.py vs requirements.txt](https://caremad.io/posts/2013/07/setup-vs-requirement/)
+							- [A template to make a good README.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+						</textarea>
+					</section>
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/js/reveal.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/plugin/markdown/markdown.js"></script>
+		<script>
+			Reveal.initialize();
+		</script>
+	</body>
+</html>
