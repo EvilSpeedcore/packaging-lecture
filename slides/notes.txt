@@ -16,5 +16,6 @@
 12. `python setup.py test` is deprecated
 	`dependency_links` no longer supported by pip
 	Easy Install is deprecated
+13. Last time pipenv was updated in november.
 	
 
