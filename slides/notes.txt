@@ -13,3 +13,8 @@
 9. In our this case, the long description is loaded from README.md which is a common pattern
 10. setup.cfg is processed after the contents of the setup script, but before the command-line
 11. Show how package data is added to source distribution
+12. `python setup.py test` is deprecated
+	`dependency_links` no longer supported by pip
+	Easy Install is deprecated
+	
+
