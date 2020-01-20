@@ -64,7 +64,7 @@
 								pip install package --upgrade
 								
 								# install package from an alternate index
-								pip install --index-url http://my.package.repo/simple/ package
+								pip install --index-url https://my.package.repo/simple/ package
 
 								# uninstall package
 								pip uninstall package
@@ -271,10 +271,10 @@
 								here = os.path.abspath(os.path.dirname(__file__))
 
 								with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
-									long_description = f.read()
+									description = f.read()
 								
 								setup(
-									long_description=long_description,
+									long_description=description,
 									long_description_content_type='text/markdown'								
 								)
 								```
@@ -384,7 +384,8 @@
 									'example': ['data.dat']
 								}
 								```
-								Useful if you need to install files which are used by other programs
+								Useful if you need to install files that is closely related to the
+								package implementation
 							</textarea>
 						</section>
 
@@ -511,7 +512,10 @@
 							
 							When *setup.py* is located inside a directory
 
-							`pip install directory/`
+							```
+							pip install directory\ # On Windows
+							pip install directory/ # On POSIX
+							```
 
 							When you are inside a directory with setup.py
 
